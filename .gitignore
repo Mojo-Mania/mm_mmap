@@ -5,6 +5,9 @@
 # Mojo build artifacts
 *.mojopkg
 *.mojoc
+
+# pixi build output
+*.conda
 .mojo_cache/
 
 # macOS
