@@ -1,5 +1,7 @@
 # mm_mmap
 
+[![CI](https://github.com/Mojo-Mania/mm_mmap/actions/workflows/ci.yml/badge.svg)](https://github.com/Mojo-Mania/mm_mmap/actions/workflows/ci.yml)
+
 POSIX memory mapping for [Mojo](https://mojolang.org): an owning `MemoryMap`
 type that maps a file or fresh anonymous memory into the process address space,
 plus the `mmap`/`munmap`/`msync` bindings, `page_size()`, and typed
@@ -94,6 +96,9 @@ pixi run main     # run the example
 pixi run format   # mojo format
 pixi run docs     # check docstrings
 ```
+
+CI runs the test suite on Linux and macOS, plus the formatting and docstring
+checks, on every push to `main` and on pull requests.
 
 ## License
 
