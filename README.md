@@ -18,9 +18,40 @@ design rationale.
 
 ## Install
 
-Add the package to your project by vendoring the `mm_mmap/` directory, or by
-adding this repository as a git submodule, and put its parent on the import
-path:
+Add this repository directly as a pixi dependency — no vendoring, no `-I` flag:
+
+```bash
+pixi add --git https://github.com/Mojo-Mania/mm_mmap.git mm_mmap
+```
+
+which records in your `pixi.toml`:
+
+```toml
+[dependencies]
+mm_mmap = { git = "https://github.com/Mojo-Mania/mm_mmap.git" }
+```
+
+pixi builds the package from source and installs `mm_mmap.mojoc` into your
+environment, so `from mm_mmap import MemoryMap` just resolves.
+
+Two requirements on the consuming project:
+
+- **`preview = ["pixi-build"]`** in its `[workspace]` table — git/source
+  dependencies are still behind pixi's preview flag.
+- **pixi 0.80 or newer.** The current `pixi-build-mojo` backend speaks
+  `pixi-build-api-version 7`; older pixi silently falls back to a 2025 backend
+  that calls the removed `mojo package -o *.mojopkg` and fails the build. Run
+  `pixi self-update` if `pixi --version` is older.
+
+To pin a specific version rather than tracking the default branch, add `--tag`,
+`--branch`, or `--rev`:
+
+```bash
+pixi add --git https://github.com/Mojo-Mania/mm_mmap.git --tag v0.1.0 mm_mmap
+```
+
+If you would rather not use the preview feature, vendor the `mm_mmap/`
+directory into your project and put its parent on the import path:
 
 ```bash
 mojo -I path/to/mm_mmap your_program.mojo
@@ -95,6 +126,7 @@ pixi run test     # run the test suite
 pixi run main     # run the example
 pixi run format   # mojo format
 pixi run docs     # check docstrings
+pixi build        # build the conda package (needs pixi >= 0.80)
 ```
 
 CI runs the test suite on Linux and macOS, plus the formatting and docstring
