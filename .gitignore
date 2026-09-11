@@ -1,0 +1,11 @@
+# Pixi
+.pixi/
+*.lock.bak
+
+# Mojo build artifacts
+*.mojopkg
+*.mojoc
+.mojo_cache/
+
+# macOS
+.DS_Store

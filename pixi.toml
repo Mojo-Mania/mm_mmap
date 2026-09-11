@@ -1,0 +1,15 @@
+[workspace]
+authors = ["Maxim Zaks <maxim.zaks@gmail.com>"]
+channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
+name = "mm_mmap"
+platforms = ["osx-arm64", "linux-64", "linux-aarch64"]
+version = "0.1.0"
+
+[tasks]
+test = "mojo -I . test/test_mmap.mojo"
+main = "mojo -I . examples/main.mojo"
+format = "mojo format ./"
+docs = "mojo doc --diagnose-missing-doc-strings -o /dev/null mm_mmap/"
+
+[dependencies]
+mojo = ">=1.1.0.dev2026091105,<2"
